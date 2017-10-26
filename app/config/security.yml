@@ -4,6 +4,8 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt  # type d'encodage pour le mot de passe
 
     role_hierarchy:
+        ROLE_CLIENT:      ROLE_CLIENT
+        ROLE_PREP:        ROLE_PREP
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
@@ -26,7 +28,21 @@ security:
             anonymous:    true
 
     access_control: # définit les règles d'accès aux différentes parties du site
+        #réservé aux ADMINS
+        - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/testAdmin, role: ROLE_ADMIN }
+        
+        #réservé aux PREPARATEURS
+        - { path: ^/gestion, role: ROLE_PREP }
+        - { path: ^/testPrep, role: ROLE_PREP }
+        
+        #réservé aux Clients inscrits
+        - { path: ^/testClient, role: ROLE_CLIENT }
+        
+        
+        #Accessible à tous
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY } 
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY } # autorisé pour les utilisateurs non authentifiés
-        - { path: ^/admin, role: ROLE_ADMIN } # autorisé uniquement pour les utilisateur authentifiés dont le role est ROLE_ADMIN
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
+        

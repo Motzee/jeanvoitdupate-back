@@ -18,4 +18,33 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+    
+    /**
+        @Route("/testAdmin", name="testRooterAdmin")
+    */
+    public function testRooterAdminAction() {
+        return $this->render('default/display.html.twig', array(
+            'message' => "Si vous êtes admin, vous verrez ceci"
+        ));
+    }
+
+    
+    /**
+        @Route("/testPrep", name="testRooterPrep")
+    */
+    public function testRooterPrepAction() {
+        return $this->render('default/display.html.twig', array(
+            'message' => "Si vous êtes préparateur, vous verrez ceci"
+        ));
+    }
+    
+    /**
+        @Route("/testClient", name="testRooterClient")
+    */
+    public function testRooterClientAction() {
+        return $this->render('default/display.html.twig', array(
+            'message' => "Si vous êtes client, vous verrez ceci"
+        ));
+    }
+    
 }
